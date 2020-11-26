@@ -3,7 +3,7 @@ package br.com.fatecmc.geacad.model.dao;
 
 import br.com.fatecmc.geacad.model.domain.Pessoa;
 import br.com.fatecmc.geacad.model.domain.EntidadeDominio;
-import br.com.fatecmc.geacad.model.connection.ConnectionFactory;
+import br.com.fatecmc.geacad.util.ConnectionConstructor;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class PessoaDAO implements IDAO {
 
     @Override
     public boolean salvar(EntidadeDominio entidade) {
-        this.conn = ConnectionFactory.getConnection();
+        this.conn = ConnectionConstructor.getConnection();
         String sql = "INSERT INTO pessoas(nome, rg, cpf, email, data_nascimento, sexo) VALUES(?, ?, ?, ?, ?, ?)";
 
         PreparedStatement stmt = null;
@@ -33,7 +33,7 @@ public class PessoaDAO implements IDAO {
             } catch (SQLException ex) {
                 System.out.println("Não foi possível salvar os dados no banco de dados.\nErro: " + ex.getMessage());
             } finally {
-                ConnectionFactory.closeConnection(conn, stmt);
+                ConnectionConstructor.closeConnection(conn, stmt);
             }
         }
         return false;
@@ -41,7 +41,7 @@ public class PessoaDAO implements IDAO {
 
     @Override
     public boolean alterar(EntidadeDominio entidade) {
-        this.conn = ConnectionFactory.getConnection();
+        this.conn = ConnectionConstructor.getConnection();
         String sql = "UPDATE pessoas SET nome=?, rg=?, cpf=?, email=?, data_nascimento=?, sexo=? WHERE id_pessoa=?";
 
         PreparedStatement stmt = null;
@@ -62,7 +62,7 @@ public class PessoaDAO implements IDAO {
             } catch (SQLException ex) {
                 System.out.println("Não foi possível alterar os dados no banco de dados.\nErro: " + ex.getMessage());
             } finally {
-                ConnectionFactory.closeConnection(conn, stmt);
+                ConnectionConstructor.closeConnection(conn, stmt);
             }
         }
         return false;
@@ -70,7 +70,7 @@ public class PessoaDAO implements IDAO {
 
     @Override
     public boolean excluir(int id) {
-        this.conn = ConnectionFactory.getConnection();
+        this.conn = ConnectionConstructor.getConnection();
         String sql = "DELETE FROM pessoas WHERE id_pessoa=?";
 
         PreparedStatement stmt = null;
@@ -85,13 +85,13 @@ public class PessoaDAO implements IDAO {
         } catch (SQLException ex) {
             System.out.println("Não foi possível excluir os dados no banco de dados.\nErro: " + ex.getMessage());
         } finally {
-            ConnectionFactory.closeConnection(conn, stmt);
+            ConnectionConstructor.closeConnection(conn, stmt);
         }
         return false;
     }
     
     public List consultar() {
-        this.conn = ConnectionFactory.getConnection();
+        this.conn = ConnectionConstructor.getConnection();
         String sql = "SELECT * FROM pessoas";
         
         PreparedStatement stmt = null;
@@ -118,14 +118,14 @@ public class PessoaDAO implements IDAO {
         } catch (SQLException ex) {
             System.out.println("Não foi possível consultar os dados no banco de dados.\nErro: " + ex.getMessage());
         } finally {
-            ConnectionFactory.closeConnection(conn, stmt, rs);
+            ConnectionConstructor.closeConnection(conn, stmt, rs);
         }
         return null;
     }
     
     @Override
     public List consultar(int id) {
-        this.conn = ConnectionFactory.getConnection();
+        this.conn = ConnectionConstructor.getConnection();
         String sql = "SELECT * FROM pessoas WHERE id_pessoa=?";
         
         PreparedStatement stmt = null;
@@ -152,7 +152,7 @@ public class PessoaDAO implements IDAO {
         } catch (SQLException ex) {
             System.out.println("Não foi possível consultar os dados no banco de dados.\nErro: " + ex.getMessage());
         } finally {
-            ConnectionFactory.closeConnection(conn, stmt, rs);
+            ConnectionConstructor.closeConnection(conn, stmt, rs);
         }
         return null;
     }

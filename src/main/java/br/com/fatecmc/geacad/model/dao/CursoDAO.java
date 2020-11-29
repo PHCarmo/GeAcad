@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PessoaDAO implements IDAO {
+public class CursoDAO implements IDAO {
     private Connection conn;
 
     @Override

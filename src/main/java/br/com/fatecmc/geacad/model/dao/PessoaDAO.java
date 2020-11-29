@@ -12,7 +12,8 @@ public class PessoaDAO implements IDAO {
     private Connection conn;
 
     @Override
-    public boolean salvar(EntidadeDominio entidade) {
+    public int salvar(EntidadeDominio entidade) {
+        int id = 0;
         this.conn = ConnectionConstructor.getConnection();
         String sql = "INSERT INTO pessoas(nome, rg, cpf, email, data_nascimento, sexo) VALUES(?, ?, ?, ?, ?, ?)";
 
@@ -20,7 +21,9 @@ public class PessoaDAO implements IDAO {
         
         if(entidade instanceof Pessoa){
             try {
-                stmt = conn.prepareStatement(sql);
+                conn.setAutoCommit(false);
+                
+                stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, ((Pessoa) entidade).getNome());
                 stmt.setString(2, ((Pessoa) entidade).getRg());
                 stmt.setInt(3, ((Pessoa) entidade).getCpf());
@@ -28,15 +31,19 @@ public class PessoaDAO implements IDAO {
                 stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
                 stmt.setString(6, ((Pessoa) entidade).getSexo());
 
-                stmt.execute();
-                return true;
+                stmt.executeUpdate();
+                
+                ResultSet rs = stmt.getGeneratedKeys();
+                if(rs.next()) id = rs.getInt(1);
+                
+                conn.commit();	
             } catch (SQLException ex) {
                 System.out.println("Não foi possível salvar os dados no banco de dados.\nErro: " + ex.getMessage());
             } finally {
                 ConnectionConstructor.closeConnection(conn, stmt);
             }
         }
-        return false;
+        return id;
     }
 
     @Override
@@ -56,9 +63,7 @@ public class PessoaDAO implements IDAO {
                 stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
                 stmt.setString(6, ((Pessoa) entidade).getSexo());
 
-                if(stmt.executeUpdate() == 1){
-                    return true;
-                }
+                if(stmt.executeUpdate() == 1) return true;
             } catch (SQLException ex) {
                 System.out.println("Não foi possível alterar os dados no banco de dados.\nErro: " + ex.getMessage());
             } finally {
@@ -79,9 +84,7 @@ public class PessoaDAO implements IDAO {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
 
-            if(stmt.executeUpdate() == 1){
-                return true;
-            }
+            if(stmt.executeUpdate() == 1) return true;
         } catch (SQLException ex) {
             System.out.println("Não foi possível excluir os dados no banco de dados.\nErro: " + ex.getMessage());
         } finally {
@@ -90,6 +93,7 @@ public class PessoaDAO implements IDAO {
         return false;
     }
     
+    @Override
     public List consultar() {
         this.conn = ConnectionConstructor.getConnection();
         String sql = "SELECT * FROM pessoas";

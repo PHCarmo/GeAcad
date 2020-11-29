@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IDAO {
     
-    public boolean salvar(EntidadeDominio entidade);
+    public int salvar(EntidadeDominio entidade);
     public boolean alterar(EntidadeDominio entidade);
     public boolean excluir(int id);
     public List consultar();

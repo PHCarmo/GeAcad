@@ -1,22 +1,28 @@
 package br.com.fatecmc.geacad.model.domain;
 
-public class Professor extends Pessoa {
-    private String nome;
+public class Professor extends EntidadeDominio {
+    private double salario;
     private String titulacao;
+    private Pessoa pessoa;
     
     public Professor() {
-        this.nome = "";
+        super(0);
+        this.salario = 0.0;
         this.titulacao = "";
+        this.pessoa = new Pessoa();
     }
     
-    public Professor(String nome, String titulacao) {
-        this.nome = nome;
+    public Professor(double salario, String titulacao, Pessoa pessoa) {
+        this.salario = salario;
         this.titulacao = titulacao;
+        this.pessoa = pessoa;
     }
 
-    public Professor(String nome, String titulacao, int id) {
-        this.nome = nome;
+    public Professor(double salario, String titulacao, Pessoa pessoa, int id) {
+        super(id);
+        this.salario = salario;
         this.titulacao = titulacao;
+        this.pessoa = pessoa;
     }
 
     public String getTitulacao() {
@@ -27,12 +33,20 @@ public class Professor extends Pessoa {
         this.titulacao = titulacao;
     }
 
-    public String getNome() {
-        return nome;
+    public double getSalario() {
+        return salario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
     
 }

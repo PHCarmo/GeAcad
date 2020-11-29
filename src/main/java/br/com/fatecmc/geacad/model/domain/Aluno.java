@@ -1,26 +1,32 @@
 package br.com.fatecmc.geacad.model.domain;
 
-public class Aluno extends Pessoa {
-    private String nome;
+public class Aluno extends EntidadeDominio {
+    private String status;
     private String ra;
     private Turma turma;
+    private Pessoa pessoa;
 
     public Aluno() {
-        this.nome = "";
+        super(0);
+        this.status = "";
         this.ra = "";
         this.turma = new Turma();
+        this.pessoa = new Pessoa();
     }
     
-    public Aluno(String nome, String ra, Turma turma) {
-        this.nome = nome;
+    public Aluno(String status, String ra, Turma turma, Pessoa pessoa) {
+        this.status = status;
         this.ra = ra;
         this.turma = turma;
+        this.pessoa = pessoa;
     }
 
-    public Aluno(String nome, String ra, Turma turma, int id) {
-        this.nome = nome;
+    public Aluno(String status, String ra, Turma turma, Pessoa pessoa, int id) {
+        super(id);
+        this.status = status;
         this.ra = ra;
         this.turma = turma;
+        this.pessoa = pessoa;
     }
 
     public Turma getTurma() {
@@ -31,12 +37,12 @@ public class Aluno extends Pessoa {
         this.turma = turma;
     }
 
-    public String getNome() {
-        return nome;
+    public String getStatus() {
+        return status;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getRa() {
@@ -45,6 +51,14 @@ public class Aluno extends Pessoa {
 
     public void setRa(String ra) {
         this.ra = ra;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
     
 }

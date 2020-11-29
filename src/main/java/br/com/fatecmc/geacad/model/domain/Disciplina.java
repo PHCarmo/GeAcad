@@ -4,6 +4,9 @@ public class Disciplina extends EntidadeDominio {
     private String nome;
     private int carga_horaria;
     private String ementa;
+    private String objetivo;
+    private String bibliografia;
+    private int semestre_recomendado;
     private Curso curso;
     private Professor professor;
 
@@ -12,23 +15,34 @@ public class Disciplina extends EntidadeDominio {
         this.nome = "";
         this.carga_horaria = 0;
         this.ementa = "";
+        this.objetivo = "";
+        this.bibliografia = "";
+        this.semestre_recomendado = 0;
         this.curso = new Curso();
         this.professor = new Professor();
     }
 
-    public Disciplina(String nome, int carga_horaria, String ementa, Curso curso, Professor professor) {
+    public Disciplina(String nome, int carga_horaria, String ementa, String objetivo,
+            String bibliografia, int semestre_recomendado, Curso curso, Professor professor) {
         this.nome = nome;
         this.carga_horaria = carga_horaria;
         this.ementa = ementa;
+        this.objetivo = objetivo;
+        this.bibliografia = bibliografia;
+        this.semestre_recomendado = semestre_recomendado;
         this.curso = curso;
         this.professor = professor;
     }
 
-    public Disciplina(String nome, int carga_horaria, String ementa, Curso curso, Professor professor, int id) {
+    public Disciplina(String nome, int carga_horaria, String ementa, String objetivo,
+            String bibliografia, int semestre_recomendado, Curso curso, Professor professor, int id) {
         super(id);
         this.nome = nome;
         this.carga_horaria = carga_horaria;
         this.ementa = ementa;
+        this.objetivo = objetivo;
+        this.bibliografia = bibliografia;
+        this.semestre_recomendado = semestre_recomendado;
         this.curso = curso;
         this.professor = professor;
     }
@@ -71,6 +85,30 @@ public class Disciplina extends EntidadeDominio {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
+    }
+
+    public int getSemestre_recomendado() {
+        return semestre_recomendado;
+    }
+
+    public void setSemestre_recomendado(int semestre_recomendado) {
+        this.semestre_recomendado = semestre_recomendado;
+    }
+
+    public String getObjetivo() {
+        return objetivo;
+    }
+
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    public String getBibliografia() {
+        return bibliografia;
+    }
+
+    public void setBibliografia(String bibliografia) {
+        this.bibliografia = bibliografia;
     }
     
 }

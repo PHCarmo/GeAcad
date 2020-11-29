@@ -24,7 +24,7 @@ public class PessoaController extends HttpServlet {
             throws ServletException, IOException {
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
-        int cpf = Integer.parseInt(request.getParameter("cpf"));
+        String cpf = request.getParameter("cpf");
         String email = request.getParameter("email");
         Date data_nascimento = new Date(request.getParameter("dt_nsc"));
         String sexo = request.getParameter("sexo");

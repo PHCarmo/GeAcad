@@ -5,7 +5,7 @@ import java.util.Date;
 public class Pessoa extends EntidadeDominio {
     private String nome;
     private String rg;
-    private int cpf;
+    private String cpf;
     private String email;
     private Date data_nascimento;
     private String sexo;
@@ -14,13 +14,13 @@ public class Pessoa extends EntidadeDominio {
         super(0);
         this.nome = "";
         this.rg = "";
-        this.cpf = 0;
+        this.cpf = "";
         this.email = "";
         this.data_nascimento = new Date();
         this.sexo = "";
     }
 
-    public Pessoa(String nome, String rg, int cpf, String email, Date data_nascimento, String sexo) {
+    public Pessoa(String nome, String rg, String cpf, String email, Date data_nascimento, String sexo) {
         this.nome = nome;
         this.rg = rg;
         this.cpf = cpf;
@@ -29,7 +29,7 @@ public class Pessoa extends EntidadeDominio {
         this.sexo = sexo;
     }
 
-    public Pessoa(String nome, String rg, int cpf, String email, Date data_nascimento, String sexo, int id) {
+    public Pessoa(String nome, String rg, String cpf, String email, Date data_nascimento, String sexo, int id) {
         super(id);
         this.nome = nome;
         this.rg = rg;
@@ -63,11 +63,11 @@ public class Pessoa extends EntidadeDominio {
         this.rg = rg;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

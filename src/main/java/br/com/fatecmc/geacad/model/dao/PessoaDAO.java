@@ -26,7 +26,7 @@ public class PessoaDAO implements IDAO {
                 stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, ((Pessoa) entidade).getNome());
                 stmt.setString(2, ((Pessoa) entidade).getRg());
-                stmt.setInt(3, ((Pessoa) entidade).getCpf());
+                stmt.setString(3, ((Pessoa) entidade).getCpf());
                 stmt.setString(4, ((Pessoa) entidade).getEmail());
                 stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
                 stmt.setString(6, ((Pessoa) entidade).getSexo());
@@ -58,7 +58,7 @@ public class PessoaDAO implements IDAO {
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, ((Pessoa) entidade).getNome());
                 stmt.setString(2, ((Pessoa) entidade).getRg());
-                stmt.setInt(3, ((Pessoa) entidade).getCpf());
+                stmt.setString(3, ((Pessoa) entidade).getCpf());
                 stmt.setString(4, ((Pessoa) entidade).getEmail());
                 stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
                 stmt.setString(6, ((Pessoa) entidade).getSexo());
@@ -111,7 +111,7 @@ public class PessoaDAO implements IDAO {
                 pessoa.setId(rs.getInt("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setRg(rs.getString("rg"));
-                pessoa.setCpf(rs.getInt("cpf"));
+                pessoa.setCpf(rs.getString("cpf"));
                 pessoa.setEmail(rs.getString("email"));
                 pessoa.setData_nascimento(rs.getDate("data_nascimento"));
                 pessoa.setSexo(rs.getString("sexo"));
@@ -145,7 +145,7 @@ public class PessoaDAO implements IDAO {
                 pessoa.setId(rs.getInt("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setRg(rs.getString("rg"));
-                pessoa.setCpf(rs.getInt("cpf"));
+                pessoa.setCpf(rs.getString("cpf"));
                 pessoa.setEmail(rs.getString("email"));
                 pessoa.setData_nascimento(rs.getDate("data_nascimento"));
                 pessoa.setSexo(rs.getString("sexo"));

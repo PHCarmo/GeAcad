@@ -1,6 +1,7 @@
 package br.com.fatecmc.geacad.model.dao;
 
-import br.com.fatecmc.geacad.model.domain.Pessoa;
+import br.com.fatecmc.geacad.model.domain.Curso;
+import br.com.fatecmc.geacad.model.domain.Turma;
 import br.com.fatecmc.geacad.model.domain.EntidadeDominio;
 import br.com.fatecmc.geacad.util.ConnectionConstructor;
 import java.sql.*;
@@ -14,21 +15,18 @@ public class TurmaDAO implements IDAO {
     public int salvar(EntidadeDominio entidade) {
         int id = 0;
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "INSERT INTO pessoas(nome, rg, cpf, email, data_nascimento, sexo) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO turmas(descricao, data_inicio, cursos_id_curso) VALUES(?, ?, ?)";
 
         PreparedStatement stmt = null;
         
-        if(entidade instanceof Pessoa){
+        if(entidade instanceof Turma){
             try {
                 conn.setAutoCommit(false);
                 
                 stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                stmt.setString(1, ((Pessoa) entidade).getNome());
-                stmt.setString(2, ((Pessoa) entidade).getRg());
-                stmt.setString(3, ((Pessoa) entidade).getCpf());
-                stmt.setString(4, ((Pessoa) entidade).getEmail());
-                stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
-                stmt.setString(6, ((Pessoa) entidade).getSexo());
+                stmt.setString(1, ((Turma) entidade).getDescricao());
+                stmt.setDate(2, new Date(((Turma) entidade).getData_inicio().getTime()));
+                stmt.setInt(3, ((Turma) entidade).getCurso().getId());
 
                 stmt.executeUpdate();
                 
@@ -48,19 +46,17 @@ public class TurmaDAO implements IDAO {
     @Override
     public boolean alterar(EntidadeDominio entidade) {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "UPDATE pessoas SET nome=?, rg=?, cpf=?, email=?, data_nascimento=?, sexo=? WHERE id_pessoa=?";
+        String sql = "UPDATE turmas SET descricao=?, data_inicio=?, cursos_id_curso=? WHERE id_turma=?";
 
         PreparedStatement stmt = null;
         
-        if(entidade instanceof Pessoa){
+        if(entidade instanceof Turma){
             try {
                 stmt = conn.prepareStatement(sql);
-                stmt.setString(1, ((Pessoa) entidade).getNome());
-                stmt.setString(2, ((Pessoa) entidade).getRg());
-                stmt.setString(3, ((Pessoa) entidade).getCpf());
-                stmt.setString(4, ((Pessoa) entidade).getEmail());
-                stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
-                stmt.setString(6, ((Pessoa) entidade).getSexo());
+                stmt.setString(1, ((Turma) entidade).getDescricao());
+                stmt.setDate(2, new Date(((Turma) entidade).getData_inicio().getTime()));
+                stmt.setInt(3, ((Turma) entidade).getCurso().getId());
+                stmt.setInt(4, entidade.getId());
 
                 if(stmt.executeUpdate() == 1) return true;
             } catch (SQLException ex) {
@@ -75,7 +71,7 @@ public class TurmaDAO implements IDAO {
     @Override
     public boolean excluir(int id) {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "DELETE FROM pessoas WHERE id_pessoa=?";
+        String sql = "DELETE FROM turmas WHERE id_turma=?";
 
         PreparedStatement stmt = null;
 
@@ -95,29 +91,28 @@ public class TurmaDAO implements IDAO {
     @Override
     public List consultar() {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "SELECT * FROM pessoas";
+        String sql = "SELECT * FROM turmas";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Pessoa> pessoas = new ArrayList<>();
+        List<Turma> turmas = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            Pessoa pessoa = new Pessoa();
+            Turma turma = new Turma();
+            Curso curso = new Curso();
             while(rs.next()) {
-                pessoa.setId(rs.getInt("id_pessoa"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setRg(rs.getString("rg"));
-                pessoa.setCpf(rs.getString("cpf"));
-                pessoa.setEmail(rs.getString("email"));
-                pessoa.setData_nascimento(rs.getDate("data_nascimento"));
-                pessoa.setSexo(rs.getString("sexo"));
-                pessoas.add(pessoa);
+                turma.setId(rs.getInt("id_turma"));
+                turma.setDescricao(rs.getString("descricao"));
+                turma.setData_inicio(rs.getDate("data_inicio"));
+                curso.setId(rs.getInt("cursos_id_curso"));
+                turma.setCurso(curso);
+                turmas.add(turma);
             }
                 
-            return pessoas;
+            return turmas;
         } catch (SQLException ex) {
             System.out.println("Não foi possível consultar os dados no banco de dados.\nErro: " + ex.getMessage());
         } finally {
@@ -129,29 +124,28 @@ public class TurmaDAO implements IDAO {
     @Override
     public List consultar(int id) {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "SELECT * FROM pessoas WHERE id_pessoa=?";
+        String sql = "SELECT * FROM turmas WHERE id_turma=?";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Pessoa> pessoas = new ArrayList<>();
+        List<Turma> turmas = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            Pessoa pessoa = new Pessoa();
+            Turma turma = new Turma();
+            Curso curso = new Curso();
             while(rs.next()) {
-                pessoa.setId(rs.getInt("id_pessoa"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setRg(rs.getString("rg"));
-                pessoa.setCpf(rs.getString("cpf"));
-                pessoa.setEmail(rs.getString("email"));
-                pessoa.setData_nascimento(rs.getDate("data_nascimento"));
-                pessoa.setSexo(rs.getString("sexo"));
-                pessoas.add(pessoa);
+                turma.setId(rs.getInt("id_turma"));
+                turma.setDescricao(rs.getString("descricao"));
+                turma.setData_inicio(rs.getDate("data_inicio"));
+                curso.setId(rs.getInt("cursos_id_curso"));
+                turma.setCurso(curso);
+                turmas.add(turma);
             }
                 
-            return pessoas;
+            return turmas;
         } catch (SQLException ex) {
             System.out.println("Não foi possível consultar os dados no banco de dados.\nErro: " + ex.getMessage());
         } finally {

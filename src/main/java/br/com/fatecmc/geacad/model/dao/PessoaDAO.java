@@ -61,6 +61,7 @@ public class PessoaDAO implements IDAO {
                 stmt.setString(4, ((Pessoa) entidade).getEmail());
                 stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
                 stmt.setString(6, ((Pessoa) entidade).getSexo());
+                stmt.setInt(7, entidade.getId());
 
                 if(stmt.executeUpdate() == 1) return true;
             } catch (SQLException ex) {
@@ -137,6 +138,8 @@ public class PessoaDAO implements IDAO {
         List<Pessoa> pessoas = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+                
             rs = stmt.executeQuery();
             
             Pessoa pessoa = new Pessoa();

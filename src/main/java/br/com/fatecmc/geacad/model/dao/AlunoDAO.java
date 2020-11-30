@@ -1,7 +1,6 @@
 package br.com.fatecmc.geacad.model.dao;
 
-import br.com.fatecmc.geacad.model.domain.Pessoa;
-import br.com.fatecmc.geacad.model.domain.EntidadeDominio;
+import br.com.fatecmc.geacad.model.domain.*;
 import br.com.fatecmc.geacad.util.ConnectionConstructor;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,21 +13,19 @@ public class AlunoDAO implements IDAO {
     public int salvar(EntidadeDominio entidade) {
         int id = 0;
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "INSERT INTO pessoas(nome, rg, cpf, email, data_nascimento, sexo) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO alunos(status, ra, pessoas_id_pessoa, turmas_id_turma) VALUES(?, ?, ?, ?)";
 
         PreparedStatement stmt = null;
         
-        if(entidade instanceof Pessoa){
+        if(entidade instanceof Aluno){
             try {
                 conn.setAutoCommit(false);
                 
                 stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                stmt.setString(1, ((Pessoa) entidade).getNome());
-                stmt.setString(2, ((Pessoa) entidade).getRg());
-                stmt.setString(3, ((Pessoa) entidade).getCpf());
-                stmt.setString(4, ((Pessoa) entidade).getEmail());
-                stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
-                stmt.setString(6, ((Pessoa) entidade).getSexo());
+                stmt.setString(1, ((Aluno) entidade).getStatus());
+                stmt.setString(2, ((Aluno) entidade).getRa());
+                stmt.setInt(3, ((Aluno) entidade).getPessoa().getId());
+                stmt.setInt(4, ((Aluno) entidade).getTurma().getId());
 
                 stmt.executeUpdate();
                 
@@ -48,19 +45,18 @@ public class AlunoDAO implements IDAO {
     @Override
     public boolean alterar(EntidadeDominio entidade) {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "UPDATE pessoas SET nome=?, rg=?, cpf=?, email=?, data_nascimento=?, sexo=? WHERE id_pessoa=?";
+        String sql = "UPDATE alunos SET status=?, ra=?, pessoas_id_pessoa=?, turmas_id_turma=? WHERE id_aluno=?";
 
         PreparedStatement stmt = null;
         
-        if(entidade instanceof Pessoa){
+        if(entidade instanceof Aluno){
             try {
                 stmt = conn.prepareStatement(sql);
-                stmt.setString(1, ((Pessoa) entidade).getNome());
-                stmt.setString(2, ((Pessoa) entidade).getRg());
-                stmt.setString(3, ((Pessoa) entidade).getCpf());
-                stmt.setString(4, ((Pessoa) entidade).getEmail());
-                stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
-                stmt.setString(6, ((Pessoa) entidade).getSexo());
+                stmt.setString(1, ((Aluno) entidade).getStatus());
+                stmt.setString(2, ((Aluno) entidade).getRa());
+                stmt.setInt(3, ((Aluno) entidade).getPessoa().getId());
+                stmt.setInt(4, ((Aluno) entidade).getTurma().getId());
+                stmt.setInt(5, entidade.getId());
 
                 if(stmt.executeUpdate() == 1) return true;
             } catch (SQLException ex) {
@@ -75,7 +71,7 @@ public class AlunoDAO implements IDAO {
     @Override
     public boolean excluir(int id) {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "DELETE FROM pessoas WHERE id_pessoa=?";
+        String sql = "DELETE FROM alunos WHERE id_aluno=?";
 
         PreparedStatement stmt = null;
 
@@ -95,29 +91,31 @@ public class AlunoDAO implements IDAO {
     @Override
     public List consultar() {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "SELECT * FROM pessoas";
+        String sql = "SELECT * FROM alunos";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Pessoa> pessoas = new ArrayList<>();
+        List<Aluno> alunos = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
+            Aluno aluno = new Aluno();
             Pessoa pessoa = new Pessoa();
+            Turma turma = new Turma();
             while(rs.next()) {
-                pessoa.setId(rs.getInt("id_pessoa"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setRg(rs.getString("rg"));
-                pessoa.setCpf(rs.getString("cpf"));
-                pessoa.setEmail(rs.getString("email"));
-                pessoa.setData_nascimento(rs.getDate("data_nascimento"));
-                pessoa.setSexo(rs.getString("sexo"));
-                pessoas.add(pessoa);
+                aluno.setId(rs.getInt("id_aluno"));
+                aluno.setStatus(rs.getString("status"));
+                aluno.setRa(rs.getString("ra"));
+                pessoa.setId(rs.getInt("pessoas_id_pessoa"));
+                turma.setId(rs.getInt("turmas_id_turma"));
+                aluno.setPessoa(pessoa);
+                aluno.setTurma(turma);
+                alunos.add(aluno);
             }
                 
-            return pessoas;
+            return alunos;
         } catch (SQLException ex) {
             System.out.println("Não foi possível consultar os dados no banco de dados.\nErro: " + ex.getMessage());
         } finally {
@@ -129,29 +127,31 @@ public class AlunoDAO implements IDAO {
     @Override
     public List consultar(int id) {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "SELECT * FROM pessoas WHERE id_pessoa=?";
+        String sql = "SELECT * FROM alunos WHERE id_aluno=?";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<Pessoa> pessoas = new ArrayList<>();
+        List<Aluno> alunos = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
+            Aluno aluno = new Aluno();
             Pessoa pessoa = new Pessoa();
+            Turma turma = new Turma();
             while(rs.next()) {
-                pessoa.setId(rs.getInt("id_pessoa"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setRg(rs.getString("rg"));
-                pessoa.setCpf(rs.getString("cpf"));
-                pessoa.setEmail(rs.getString("email"));
-                pessoa.setData_nascimento(rs.getDate("data_nascimento"));
-                pessoa.setSexo(rs.getString("sexo"));
-                pessoas.add(pessoa);
+                aluno.setId(rs.getInt("id_aluno"));
+                aluno.setStatus(rs.getString("status"));
+                aluno.setRa(rs.getString("ra"));
+                pessoa.setId(rs.getInt("pessoas_id_pessoa"));
+                turma.setId(rs.getInt("turmas_id_turma"));
+                aluno.setPessoa(pessoa);
+                aluno.setTurma(turma);
+                alunos.add(aluno);
             }
-                
-            return pessoas;
+            
+            return alunos;
         } catch (SQLException ex) {
             System.out.println("Não foi possível consultar os dados no banco de dados.\nErro: " + ex.getMessage());
         } finally {

@@ -11,14 +11,14 @@ import br.com.fatecmc.geacad.model.domain.EntidadeDominio;
  *
  * @author teste
  */
-public class ValidarGradeCurricularAlunoRN implements IStrategy{
+public class ValidarLimiteAlunosTurma implements IStrategy{
 
     @Override
     public String process(EntidadeDominio entidade) {
-        boolean ValidarGradeCurricularAluno = false;
+        boolean validarLimiteAlunosNaTurma = false;
         
-        if(ValidarGradeCurricularAluno)
-            return "O aluno só pode se cadastrar em matérias que estão dentro da sua grade curricular";
+        if(validarLimiteAlunosNaTurma)
+            return "Limite de matrículas na turma alcançado";
         
         return null;
     }

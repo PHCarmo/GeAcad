@@ -27,31 +27,26 @@ public class Facade implements IFacade {
     private void initStrategy() {
         rns = new HashMap<>();
 
-        ExemploRN exemplo = new ExemploRN();
+        ValidarExistenciaAluno validar_existencia_aluno = new ValidarExistenciaAluno(); 
+        ValidarGradeCurricularAluno validar_grade_curricular_aluno = new ValidarGradeCurricularAluno();
+        ValidarLimiteAlunosTurma validar_limite_alunos_turma = new ValidarLimiteAlunosTurma();
+        ValidarMatriculaAluno validar_matricula_aluno = new ValidarMatriculaAluno();
         
-        ValidarExistenciaRN validarExistencia = new ValidarExistenciaRN(); 
-        ValidarGradeCurricularAlunoRN ValidarGradeAluno = new ValidarGradeCurricularAlunoRN();
-        ValidarLimiteAlunosNaTurmaRN validarLimiteAlunos = new ValidarLimiteAlunosNaTurmaRN();
-        ValidarMatriculaAlunoRN validarMatriculaMesmoCurso = new ValidarMatriculaAlunoRN();
-        
-
         List<IStrategy> rns_aluno = new ArrayList<>();
-        rns_aluno.add(validarExistencia);
+        rns_aluno.add(validar_existencia_aluno);
         
         List<IStrategy> rns_curso = new ArrayList<>();
-        rns_curso.add(validarMatriculaMesmoCurso);
+        rns_curso.add(validar_matricula_aluno);
         
         List<IStrategy> rns_disciplina = new ArrayList<>();
-        rns_disciplina.add(ValidarGradeAluno);
+        rns_disciplina.add(validar_grade_curricular_aluno);
         
         List<IStrategy> rns_pessoa = new ArrayList<>();
-        rns_pessoa.add(exemplo);
         
         List<IStrategy> rns_professor = new ArrayList<>();
-        rns_professor.add(exemplo);
         
         List<IStrategy> rns_turma = new ArrayList<>();
-        rns_turma.add(validarLimiteAlunos);
+        rns_turma.add(validar_limite_alunos_turma);
 
         rns.put(Aluno.class.getName(), rns_aluno);
         rns.put(Curso.class.getName(), rns_curso);

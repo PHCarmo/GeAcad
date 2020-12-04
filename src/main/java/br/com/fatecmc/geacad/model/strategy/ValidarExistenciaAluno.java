@@ -11,16 +11,16 @@ import br.com.fatecmc.geacad.model.domain.EntidadeDominio;
  *
  * @author teste
  */
-public class ValidarMatriculaAlunoRN implements IStrategy{
+public class ValidarExistenciaAluno implements IStrategy{
 
     @Override
     public String process(EntidadeDominio entidade) {
-        boolean validarMatriculaAluno = false;
+        boolean validarExistencia = false;
         
-        if(validarMatriculaAluno)
-            return "Um mesmo aluno não pode estar matriculado no mesmo curso em mais de uma turma.";
+        if (validarExistencia)
+            return "Aluno já cadastrado";
         
-        return null;    
+        return null;
     }
     
 }

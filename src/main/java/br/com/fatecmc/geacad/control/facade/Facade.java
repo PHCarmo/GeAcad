@@ -88,17 +88,41 @@ public class Facade implements IFacade {
 
     @Override
     public String alterar(EntidadeDominio entidade) {
-        return null;
+        String error_message = processStrategys(entidade);
+        if (error_message == null) {
+            IDAO dao = daos.get(entidade.getClass().getName());
+            dao.alterar(entidade);
+            return null;
+        } else {
+            return error_message;
+        }
     }
 
     @Override
     public String excluir(EntidadeDominio entidade) {
-        return null;
+        String error_message = processStrategys(entidade);
+        if (error_message == null) {
+            IDAO dao = daos.get(entidade.getClass().getName());
+            dao.excluir(entidade.getId());
+            return null;
+        } else {
+            return error_message;
+        }
     }
 
     @Override
-    public List<EntidadeDominio> consultar(EntidadeDominio entidade) {
-        return null;
+    public Object consultar(EntidadeDominio entidade) {
+        String error_message = processStrategys(entidade);
+        if (error_message == null) {
+            IDAO dao = daos.get(entidade.getClass().getName());
+            int id = entidade.getId();
+            if(id != 0)
+                return dao.consultar(id);
+            else
+                return dao.consultar();
+        } else {
+            return error_message;
+        }
     }
     
 }

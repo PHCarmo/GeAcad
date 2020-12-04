@@ -28,15 +28,21 @@ public class Facade implements IFacade {
         rns = new HashMap<>();
 
         ExemploRN exemplo = new ExemploRN();
+        
+        ValidarExistenciaRN validarExistencia = new ValidarExistenciaRN(); 
+        ValidarGradeCurricularAlunoRN ValidarGradeAluno = new ValidarGradeCurricularAlunoRN();
+        ValidarLimiteAlunosNaTurmaRN validarLimiteAlunos = new ValidarLimiteAlunosNaTurmaRN();
+        ValidarMatriculaAlunoRN validarMatriculaMesmoCurso = new ValidarMatriculaAlunoRN();
+        
 
         List<IStrategy> rns_aluno = new ArrayList<>();
-        rns_aluno.add(exemplo);
+        rns_aluno.add(validarExistencia);
         
         List<IStrategy> rns_curso = new ArrayList<>();
-        rns_curso.add(exemplo);
+        rns_curso.add(validarMatriculaMesmoCurso);
         
         List<IStrategy> rns_disciplina = new ArrayList<>();
-        rns_disciplina.add(exemplo);
+        rns_disciplina.add(ValidarGradeAluno);
         
         List<IStrategy> rns_pessoa = new ArrayList<>();
         rns_pessoa.add(exemplo);
@@ -45,7 +51,7 @@ public class Facade implements IFacade {
         rns_professor.add(exemplo);
         
         List<IStrategy> rns_turma = new ArrayList<>();
-        rns_turma.add(exemplo);
+        rns_turma.add(validarLimiteAlunos);
 
         rns.put(Aluno.class.getName(), rns_aluno);
         rns.put(Curso.class.getName(), rns_curso);

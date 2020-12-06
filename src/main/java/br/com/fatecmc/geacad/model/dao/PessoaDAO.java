@@ -106,8 +106,9 @@ public class PessoaDAO implements IDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            Pessoa pessoa = new Pessoa();
             while(rs.next()) {
+            Pessoa pessoa = new Pessoa();
+                
                 pessoa.setId(rs.getInt("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setRg(rs.getString("rg"));
@@ -115,6 +116,7 @@ public class PessoaDAO implements IDAO {
                 pessoa.setEmail(rs.getString("email"));
                 pessoa.setData_nascimento(rs.getDate("data_nascimento"));
                 pessoa.setSexo(rs.getString("sexo"));
+                
                 pessoas.add(pessoa);
             }
                 
@@ -142,8 +144,9 @@ public class PessoaDAO implements IDAO {
                 
             rs = stmt.executeQuery();
             
-            Pessoa pessoa = new Pessoa();
             while(rs.next()) {
+            Pessoa pessoa = new Pessoa();
+                
                 pessoa.setId(rs.getInt("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setRg(rs.getString("rg"));
@@ -151,6 +154,7 @@ public class PessoaDAO implements IDAO {
                 pessoa.setEmail(rs.getString("email"));
                 pessoa.setData_nascimento(rs.getDate("data_nascimento"));
                 pessoa.setSexo(rs.getString("sexo"));
+                
                 pessoas.add(pessoa);
             }
                 

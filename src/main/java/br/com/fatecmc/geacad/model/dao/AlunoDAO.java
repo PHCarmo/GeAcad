@@ -101,16 +101,16 @@ public class AlunoDAO implements IDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            Aluno aluno = new Aluno();
-            Pessoa pessoa = new Pessoa();
-            Turma turma = new Turma();
             while(rs.next()) {
+            Aluno aluno = new Aluno();
+            Turma turma = new Turma();
+                
                 aluno.setId(rs.getInt("id_aluno"));
                 aluno.setStatus(rs.getString("status"));
                 aluno.setRa(rs.getString("ra"));
                 pessoa.setId(rs.getInt("pessoas_id_pessoa"));
                 turma.setId(rs.getInt("turmas_id_turma"));
-                aluno.setPessoa(pessoa);
+                
                 aluno.setTurma(turma);
                 alunos.add(aluno);
             }
@@ -135,18 +135,20 @@ public class AlunoDAO implements IDAO {
         List<Aluno> alunos = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
             rs = stmt.executeQuery();
             
-            Aluno aluno = new Aluno();
-            Pessoa pessoa = new Pessoa();
-            Turma turma = new Turma();
             while(rs.next()) {
+            Aluno aluno = new Aluno();
+            Turma turma = new Turma();
+                
                 aluno.setId(rs.getInt("id_aluno"));
                 aluno.setStatus(rs.getString("status"));
                 aluno.setRa(rs.getString("ra"));
                 pessoa.setId(rs.getInt("pessoas_id_pessoa"));
                 turma.setId(rs.getInt("turmas_id_turma"));
-                aluno.setPessoa(pessoa);
+                
                 aluno.setTurma(turma);
                 alunos.add(aluno);
             }

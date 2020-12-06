@@ -100,14 +100,13 @@ public class ProfessorDAO implements IDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            Professor professor = new Professor();
-            Pessoa pessoa = new Pessoa();
             while(rs.next()) {
+                Professor professor = new Professor();
+
                 professor.setId(rs.getInt("id_professor"));
                 professor.setSalario(rs.getDouble("salario"));
                 professor.setTitulacao(rs.getString("titulacao"));
-                pessoa.setId(rs.getInt("pessoas_id_pessoa"));
-                professor.setPessoa(pessoa);
+                
                 professores.add(professor);
             }
                 
@@ -131,16 +130,17 @@ public class ProfessorDAO implements IDAO {
         List<Professor> professores = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
             rs = stmt.executeQuery();
             
-            Professor professor = new Professor();
-            Pessoa pessoa = new Pessoa();
             while(rs.next()) {
+            Professor professor = new Professor();
+
                 professor.setId(rs.getInt("id_professor"));
                 professor.setSalario(rs.getDouble("salario"));
                 professor.setTitulacao(rs.getString("titulacao"));
-                pessoa.setId(rs.getInt("pessoas_id_pessoa"));
-                professor.setPessoa(pessoa);
+                
                 professores.add(professor);
             }
             

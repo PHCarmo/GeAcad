@@ -102,13 +102,15 @@ public class CursoDAO implements IDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            Curso curso = new Curso();
             while(rs.next()) {
+                Curso curso = new Curso();
+                
                 curso.setId(rs.getInt("id_curso"));
                 curso.setNome(rs.getString("nome"));
                 curso.setTurno(rs.getString("turno"));
                 curso.setDescricao(rs.getString("descricao"));
                 curso.setDuracao(rs.getInt("duracao"));
+                
                 cursos.add(curso);
             }
                 
@@ -132,15 +134,19 @@ public class CursoDAO implements IDAO {
         List<Curso> cursos = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
             rs = stmt.executeQuery();
             
-            Curso curso = new Curso();
             while(rs.next()) {
+                Curso curso = new Curso();
+                
                 curso.setId(rs.getInt("id_curso"));
                 curso.setNome(rs.getString("nome"));
                 curso.setTurno(rs.getString("turno"));
                 curso.setDescricao(rs.getString("descricao"));
                 curso.setDuracao(rs.getInt("duracao"));
+                
                 cursos.add(curso);
             }
                 

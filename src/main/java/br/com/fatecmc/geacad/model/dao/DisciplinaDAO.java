@@ -111,10 +111,11 @@ public class DisciplinaDAO implements IDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            Disciplina disciplina = new Disciplina();
-            Curso curso = new Curso();
-            Professor professor = new Professor();
             while(rs.next()) {
+                Disciplina disciplina = new Disciplina();
+                Curso curso = new Curso();
+                Professor professor = new Professor();
+                
                 disciplina.setId(rs.getInt("id_disciplina"));
                 disciplina.setNome(rs.getString("nome"));
                 disciplina.setCarga_horaria(rs.getInt("carga_horaria"));
@@ -124,6 +125,7 @@ public class DisciplinaDAO implements IDAO {
                 disciplina.setSemestre_recomendado(rs.getInt("semestre_recomendado"));
                 curso.setId(rs.getInt("cursos_id_curso"));
                 professor.setId(rs.getInt("professores_id_professor"));
+                
                 disciplina.setCurso(curso);
                 disciplina.setProfessor(professor);
                 disciplinas.add(disciplina);
@@ -149,12 +151,15 @@ public class DisciplinaDAO implements IDAO {
         List<Disciplina> disciplinas = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
             rs = stmt.executeQuery();
             
-            Disciplina disciplina = new Disciplina();
-            Curso curso = new Curso();
-            Professor professor = new Professor();
             while(rs.next()) {
+                Disciplina disciplina = new Disciplina();
+                Curso curso = new Curso();
+                Professor professor = new Professor();
+                
                 disciplina.setId(rs.getInt("id_disciplina"));
                 disciplina.setNome(rs.getString("nome"));
                 disciplina.setCarga_horaria(rs.getInt("carga_horaria"));
@@ -164,6 +169,7 @@ public class DisciplinaDAO implements IDAO {
                 disciplina.setSemestre_recomendado(rs.getInt("semestre_recomendado"));
                 curso.setId(rs.getInt("cursos_id_curso"));
                 professor.setId(rs.getInt("professores_id_professor"));
+                
                 disciplina.setCurso(curso);
                 disciplina.setProfessor(professor);
                 disciplinas.add(disciplina);

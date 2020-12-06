@@ -101,13 +101,15 @@ public class TurmaDAO implements IDAO {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
-            Turma turma = new Turma();
-            Curso curso = new Curso();
             while(rs.next()) {
+                Turma turma = new Turma();
+                Curso curso = new Curso();
+                
                 turma.setId(rs.getInt("id_turma"));
                 turma.setDescricao(rs.getString("descricao"));
                 turma.setData_inicio(rs.getDate("data_inicio"));
                 curso.setId(rs.getInt("cursos_id_curso"));
+                
                 turma.setCurso(curso);
                 turmas.add(turma);
             }
@@ -132,15 +134,19 @@ public class TurmaDAO implements IDAO {
         List<Turma> turmas = new ArrayList<>();
         try {
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            
             rs = stmt.executeQuery();
             
-            Turma turma = new Turma();
-            Curso curso = new Curso();
             while(rs.next()) {
+                Turma turma = new Turma();
+                Curso curso = new Curso();
+                
                 turma.setId(rs.getInt("id_turma"));
                 turma.setDescricao(rs.getString("descricao"));
                 turma.setData_inicio(rs.getDate("data_inicio"));
                 curso.setId(rs.getInt("cursos_id_curso"));
+                
                 turma.setCurso(curso);
                 turmas.add(turma);
             }

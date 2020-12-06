@@ -24,7 +24,7 @@ public class AlunoDAO implements IDAO {
                 stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, ((Aluno) entidade).getStatus());
                 stmt.setString(2, ((Aluno) entidade).getRa());
-                stmt.setInt(3, ((Aluno) entidade).getPessoa().getId());
+                stmt.setInt(3, ((Aluno) entidade).getId_pessoa());
                 stmt.setInt(4, ((Aluno) entidade).getTurma().getId());
 
                 stmt.executeUpdate();
@@ -54,7 +54,7 @@ public class AlunoDAO implements IDAO {
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, ((Aluno) entidade).getStatus());
                 stmt.setString(2, ((Aluno) entidade).getRa());
-                stmt.setInt(3, ((Aluno) entidade).getPessoa().getId());
+                stmt.setInt(3, ((Aluno) entidade).getId_pessoa());
                 stmt.setInt(4, ((Aluno) entidade).getTurma().getId());
                 stmt.setInt(5, entidade.getId());
 
@@ -91,7 +91,7 @@ public class AlunoDAO implements IDAO {
     @Override
     public List consultar() {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "SELECT * FROM alunos";
+        String sql = "SELECT * FROM alunos LEFT JOIN pessoas ON pessoas_id_pessoa = id_pessoa";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -102,13 +102,19 @@ public class AlunoDAO implements IDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()) {
-            Aluno aluno = new Aluno();
-            Turma turma = new Turma();
+                Aluno aluno = new Aluno();
+                Turma turma = new Turma();
                 
                 aluno.setId(rs.getInt("id_aluno"));
                 aluno.setStatus(rs.getString("status"));
                 aluno.setRa(rs.getString("ra"));
-                pessoa.setId(rs.getInt("pessoas_id_pessoa"));
+                aluno.setId_pessoa(rs.getInt("pessoas_id_pessoa"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setRg(rs.getString("rg"));
+                aluno.setCpf(rs.getString("cpf"));
+                aluno.setEmail(rs.getString("email"));
+                aluno.setData_nascimento(rs.getDate("data_nascimento"));
+                aluno.setSexo(rs.getString("sexo"));
                 turma.setId(rs.getInt("turmas_id_turma"));
                 
                 aluno.setTurma(turma);
@@ -127,7 +133,7 @@ public class AlunoDAO implements IDAO {
     @Override
     public List consultar(int id) {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "SELECT * FROM alunos WHERE id_aluno=?";
+        String sql = "SELECT * FROM alunos LEFT JOIN pessoas ON pessoas_id_pessoa = id_pessoa WHERE id_aluno=?";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -140,19 +146,25 @@ public class AlunoDAO implements IDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()) {
-            Aluno aluno = new Aluno();
-            Turma turma = new Turma();
+                Aluno aluno = new Aluno();
+                Turma turma = new Turma();
                 
                 aluno.setId(rs.getInt("id_aluno"));
                 aluno.setStatus(rs.getString("status"));
                 aluno.setRa(rs.getString("ra"));
-                pessoa.setId(rs.getInt("pessoas_id_pessoa"));
+                aluno.setId_pessoa(rs.getInt("pessoas_id_pessoa"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setRg(rs.getString("rg"));
+                aluno.setCpf(rs.getString("cpf"));
+                aluno.setEmail(rs.getString("email"));
+                aluno.setData_nascimento(rs.getDate("data_nascimento"));
+                aluno.setSexo(rs.getString("sexo"));
                 turma.setId(rs.getInt("turmas_id_turma"));
                 
                 aluno.setTurma(turma);
                 alunos.add(aluno);
             }
-            
+                
             return alunos;
         } catch (SQLException ex) {
             System.out.println("Não foi possível consultar os dados no banco de dados.\nErro: " + ex.getMessage());

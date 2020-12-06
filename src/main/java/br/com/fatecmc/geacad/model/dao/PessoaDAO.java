@@ -1,7 +1,6 @@
 package br.com.fatecmc.geacad.model.dao;
 
-import br.com.fatecmc.geacad.model.domain.Pessoa;
-import br.com.fatecmc.geacad.model.domain.EntidadeDominio;
+import br.com.fatecmc.geacad.model.domain.*;
 import br.com.fatecmc.geacad.util.ConnectionConstructor;
 import java.sql.*;
 import java.util.ArrayList;
@@ -61,8 +60,11 @@ public class PessoaDAO implements IDAO {
                 stmt.setString(4, ((Pessoa) entidade).getEmail());
                 stmt.setDate(5, new Date(((Pessoa) entidade).getData_nascimento().getTime()));
                 stmt.setString(6, ((Pessoa) entidade).getSexo());
-                stmt.setInt(7, entidade.getId());
-
+                if(entidade instanceof Aluno)
+                    stmt.setInt(7, ((Aluno) entidade).getId_pessoa());
+                else
+                    stmt.setInt(7, ((Professor) entidade).getId_pessoa());
+                
                 if(stmt.executeUpdate() == 1) return true;
             } catch (SQLException ex) {
                 System.out.println("Não foi possível alterar os dados no banco de dados.\nErro: " + ex.getMessage());
@@ -107,7 +109,7 @@ public class PessoaDAO implements IDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()) {
-            Pessoa pessoa = new Pessoa();
+                Pessoa pessoa = new Pessoa();
                 
                 pessoa.setId(rs.getInt("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));
@@ -145,7 +147,7 @@ public class PessoaDAO implements IDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()) {
-            Pessoa pessoa = new Pessoa();
+                Pessoa pessoa = new Pessoa();
                 
                 pessoa.setId(rs.getInt("id_pessoa"));
                 pessoa.setNome(rs.getString("nome"));

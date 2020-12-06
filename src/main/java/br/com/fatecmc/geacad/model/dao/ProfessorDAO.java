@@ -2,7 +2,6 @@ package br.com.fatecmc.geacad.model.dao;
 
 import br.com.fatecmc.geacad.model.domain.Professor;
 import br.com.fatecmc.geacad.model.domain.EntidadeDominio;
-import br.com.fatecmc.geacad.model.domain.Pessoa;
 import br.com.fatecmc.geacad.util.ConnectionConstructor;
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class ProfessorDAO implements IDAO {
                 stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 stmt.setDouble(1, ((Professor) entidade).getSalario());
                 stmt.setString(2, ((Professor) entidade).getTitulacao());
-                stmt.setInt(3, ((Professor) entidade).getPessoa().getId());
+                stmt.setInt(3, ((Professor) entidade).getId_pessoa());
                 stmt.executeUpdate();
                 
                 ResultSet rs = stmt.getGeneratedKeys();
@@ -54,7 +53,7 @@ public class ProfessorDAO implements IDAO {
                 stmt = conn.prepareStatement(sql);
                 stmt.setDouble(1, ((Professor) entidade).getSalario());
                 stmt.setString(2, ((Professor) entidade).getTitulacao());
-                stmt.setInt(3, ((Professor) entidade).getPessoa().getId());
+                stmt.setInt(3, ((Professor) entidade).getId_pessoa());
                 stmt.setInt(4, entidade.getId());
 
                 if(stmt.executeUpdate() == 1) return true;
@@ -90,7 +89,7 @@ public class ProfessorDAO implements IDAO {
     @Override
     public List consultar() {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "SELECT * FROM professores";
+        String sql = "SELECT * FROM professores LEFT JOIN pessoas ON pessoas_id_pessoa = id_pessoa";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -106,6 +105,13 @@ public class ProfessorDAO implements IDAO {
                 professor.setId(rs.getInt("id_professor"));
                 professor.setSalario(rs.getDouble("salario"));
                 professor.setTitulacao(rs.getString("titulacao"));
+                professor.setId_pessoa(rs.getInt("pessoas_id_pessoa"));
+                professor.setNome(rs.getString("nome"));
+                professor.setRg(rs.getString("rg"));
+                professor.setCpf(rs.getString("cpf"));
+                professor.setEmail(rs.getString("email"));
+                professor.setData_nascimento(rs.getDate("data_nascimento"));
+                professor.setSexo(rs.getString("sexo"));
                 
                 professores.add(professor);
             }
@@ -122,7 +128,7 @@ public class ProfessorDAO implements IDAO {
     @Override
     public List consultar(int id) {
         this.conn = ConnectionConstructor.getConnection();
-        String sql = "SELECT * FROM professores WHERE id_professor=?";
+        String sql = "SELECT * FROM professores LEFT JOIN pessoas ON pessoas_id_pessoa = id_pessoa WHERE id_professor=?";
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -135,15 +141,22 @@ public class ProfessorDAO implements IDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()) {
-            Professor professor = new Professor();
+                Professor professor = new Professor();
 
                 professor.setId(rs.getInt("id_professor"));
                 professor.setSalario(rs.getDouble("salario"));
                 professor.setTitulacao(rs.getString("titulacao"));
+                professor.setId_pessoa(rs.getInt("pessoas_id_pessoa"));
+                professor.setNome(rs.getString("nome"));
+                professor.setRg(rs.getString("rg"));
+                professor.setCpf(rs.getString("cpf"));
+                professor.setEmail(rs.getString("email"));
+                professor.setData_nascimento(rs.getDate("data_nascimento"));
+                professor.setSexo(rs.getString("sexo"));
                 
                 professores.add(professor);
             }
-            
+                
             return professores;
         } catch (SQLException ex) {
             System.out.println("Não foi possível consultar os dados no banco de dados.\nErro: " + ex.getMessage());

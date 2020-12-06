@@ -1,28 +1,39 @@
 package br.com.fatecmc.geacad.model.domain;
 
-public class Professor extends EntidadeDominio {
+import java.util.Date;
+
+public class Professor extends Pessoa {
     private double salario;
     private String titulacao;
-    private Pessoa pessoa;
+    private int id_pessoa;
     
     public Professor() {
-        super(0);
+        super();
         this.salario = 0.0;
         this.titulacao = "";
-        this.pessoa = new Pessoa();
-    }
-    
-    public Professor(double salario, String titulacao, Pessoa pessoa) {
-        this.salario = salario;
-        this.titulacao = titulacao;
-        this.pessoa = pessoa;
+        this.id_pessoa = 0;
     }
 
-    public Professor(double salario, String titulacao, Pessoa pessoa, int id) {
-        super(id);
+    public Professor(double salario, String titulacao, int id_pessoa) {
         this.salario = salario;
         this.titulacao = titulacao;
-        this.pessoa = pessoa;
+        this.id_pessoa = id_pessoa;
+    }
+
+    public Professor(double salario, String titulacao, int id_pessoa, String nome,
+            String rg, String cpf, String email, Date data_nascimento, String sexo) {
+        super(nome, rg, cpf, email, data_nascimento, sexo);
+        this.salario = salario;
+        this.titulacao = titulacao;
+        this.id_pessoa = id_pessoa;
+    }
+
+    public Professor(double salario, String titulacao, int id_pessoa, String nome,
+            String rg, String cpf, String email, Date data_nascimento, String sexo, int id) {
+        super(nome, rg, cpf, email, data_nascimento, sexo, id);
+        this.salario = salario;
+        this.titulacao = titulacao;
+        this.id_pessoa = id_pessoa;
     }
 
     public String getTitulacao() {
@@ -41,12 +52,12 @@ public class Professor extends EntidadeDominio {
         this.salario = salario;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public int getId_pessoa() {
+        return id_pessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
     }
     
 }

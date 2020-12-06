@@ -1,32 +1,44 @@
 package br.com.fatecmc.geacad.model.domain;
 
-public class Aluno extends EntidadeDominio {
+import java.util.Date;
+
+public class Aluno extends Pessoa {
     private String status;
     private String ra;
     private Turma turma;
-    private Pessoa pessoa;
+    private int id_pessoa;
 
     public Aluno() {
-        super(0);
+        super();
         this.status = "";
         this.ra = "";
         this.turma = new Turma();
-        this.pessoa = new Pessoa();
-    }
-    
-    public Aluno(String status, String ra, Turma turma, Pessoa pessoa) {
-        this.status = status;
-        this.ra = ra;
-        this.turma = turma;
-        this.pessoa = pessoa;
+        this.id_pessoa = 0;
     }
 
-    public Aluno(String status, String ra, Turma turma, Pessoa pessoa, int id) {
-        super(id);
+    public Aluno(String status, String ra, Turma turma, int id_pessoa) {
         this.status = status;
         this.ra = ra;
         this.turma = turma;
-        this.pessoa = pessoa;
+        this.id_pessoa = id_pessoa;
+    }
+
+    public Aluno(String status, String ra, Turma turma, int id_pessoa, String nome,
+            String rg, String cpf, String email, Date data_nascimento, String sexo) {
+        super(nome, rg, cpf, email, data_nascimento, sexo);
+        this.status = status;
+        this.ra = ra;
+        this.turma = turma;
+        this.id_pessoa = id_pessoa;
+    }
+
+    public Aluno(String status, String ra, Turma turma, int id_pessoa, String nome,
+            String rg, String cpf, String email, Date data_nascimento, String sexo, int id) {
+        super(nome, rg, cpf, email, data_nascimento, sexo, id);
+        this.status = status;
+        this.ra = ra;
+        this.turma = turma;
+        this.id_pessoa = id_pessoa;
     }
 
     public Turma getTurma() {
@@ -53,12 +65,12 @@ public class Aluno extends EntidadeDominio {
         this.ra = ra;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public int getId_pessoa() {
+        return id_pessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
     }
     
 }

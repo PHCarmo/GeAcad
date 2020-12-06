@@ -98,7 +98,12 @@ public class Facade implements IFacade {
     public String alterar(EntidadeDominio entidade) {
         String error_message = processStrategys(entidade);
         if (error_message == null) {
-            IDAO dao = daos.get(entidade.getClass().getName());
+            IDAO dao;
+            if(entidade instanceof Aluno || entidade instanceof Professor){
+                dao = daos.get(new Pessoa().getClass().getName());
+                dao.alterar(entidade);
+            }
+            dao = daos.get(entidade.getClass().getName());
             dao.alterar(entidade);
             return null;
         } else {
@@ -110,7 +115,15 @@ public class Facade implements IFacade {
     public String excluir(EntidadeDominio entidade) {
         String error_message = processStrategys(entidade);
         if (error_message == null) {
-            IDAO dao = daos.get(entidade.getClass().getName());
+            IDAO dao;
+            if(entidade instanceof Aluno){
+                dao = daos.get(new Pessoa().getClass().getName());
+                dao.excluir(((Aluno) entidade).getId_pessoa());
+            }else if(entidade instanceof Professor){
+                dao = daos.get(new Pessoa().getClass().getName());
+                dao.excluir(((Professor) entidade).getId_pessoa());
+            }
+            dao = daos.get(entidade.getClass().getName());
             dao.excluir(entidade.getId());
             return null;
         } else {

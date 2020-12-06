@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "Controller", urlPatterns = {"/Servlet"})
+@WebServlet(name = "Controller", urlPatterns = {"/Aluno", "/Curso", "/Disciplina", "/Professor", "/Turma"})
 public class Controller extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String operacao = null;
@@ -28,11 +28,11 @@ public class Controller extends HttpServlet {
         cmds.put("CONSULTAR", new ConsultarCommand());
         
         vhs = new HashMap<>();
-        vhs.put("/geacad/Servlet", new AlunoVH());
-        vhs.put("/ProjetoESIII_Cliente/exemplo", new CursoVH());
-        vhs.put("/ProjetoESIII_Cliente/exemplo", new DisciplinaVH());
-        vhs.put("/ProjetoESIII_Cliente/exemplo", new ProfessorVH());
-        vhs.put("/ProjetoESIII_Cliente/exemplo", new TurmaVH());
+        vhs.put("/geacad/Aluno", new AlunoVH());
+        vhs.put("/geacad/Curso", new CursoVH());
+        vhs.put("/geacad/Disciplina", new DisciplinaVH());
+        vhs.put("/geacad/Professor", new ProfessorVH());
+        vhs.put("/geacad/Turma", new TurmaVH());
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

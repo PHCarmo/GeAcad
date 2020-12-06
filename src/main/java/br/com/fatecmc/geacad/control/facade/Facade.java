@@ -78,7 +78,15 @@ public class Facade implements IFacade {
     public String salvar(EntidadeDominio entidade) {
         String error_message = processStrategys(entidade);
         if (error_message == null) {
-            IDAO dao = daos.get(entidade.getClass().getName());
+            IDAO dao;
+            if(entidade instanceof Aluno){
+                dao = daos.get(new Pessoa().getClass().getName());
+                ((Aluno) entidade).setId_pessoa(dao.salvar(entidade));
+            }else if(entidade instanceof Professor){
+                dao = daos.get(new Pessoa().getClass().getName());
+                ((Professor) entidade).setId_pessoa(dao.salvar(entidade));
+            }
+            dao = daos.get(entidade.getClass().getName());
             dao.salvar(entidade);
             return null;
         } else {

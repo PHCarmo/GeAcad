@@ -1,0 +1,52 @@
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <link href="./css/style.css" rel="stylesheet" type="text/css" />
+        <title>Formulário Disciplina</title>
+    </head>
+<body>
+<h1>Formulário de Disciplina</h1>
+
+<form action="./Aluno" method="post">
+<fieldset>
+    
+    <fieldset class="grupo">
+        <div class="campo">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" style="width: 20em" value="">
+        </div>
+    </fieldset> 
+
+    <div class="campo">
+        <label for="cargah">Carga Horária</label>
+        <input type="text" id="cargah" name="cargah" style="width: 20em" value="">
+    </div>
+
+    <div class="campo">
+        <label for="ementa">Ementa</label>
+        <input type="text" id="ementa" name="ementa" style="width: 20em" value="">
+    </div>
+    
+    <fieldset class="grupo">
+        <div class="campo">
+            <label for="objetivo">Objetivo</label>
+            <input type="text" id="objetivo" name="objetivo" style="width: 40em" value="">
+        </div>
+    </fieldset>
+
+    <div class="campo">
+        <label for="bibliografia">Bibliografia</label>
+        <input type="text" id="bibliografia" name="bibliografia" style="width: 20em" value="">
+    </div>
+
+    <div class="campo">
+        <label for="semestrereco">Semestre Recomendado</label>
+        <input type="text" id="semestrereco" name="semestrereco" style="width: 20em" value="">
+    </div>  
+    
+    <button class="botao submit" type="submit" name="operacao" value="SALVAR">Salvar</button>
+    
+</fieldset>
+</form>
+
+</body></html>

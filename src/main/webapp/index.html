@@ -1,35 +1,66 @@
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <link href="./css/style.css" rel="stylesheet" type="text/css" />
-        <title>GeAcad - Home</title>
-    </head>
-    <body>
-        <h1>Bem vindo!</h1>
+<!DOCTYPE html>
+ 
+<html  xml:lang="pt" lang="pt">
+ 
+<head>
+    <title>GeAcad - Home</title>
+    <style type="text/css">
+    <!--
+        body {
+            padding:0px;
+            margin:0px;
+        }
+ 
+        #logo {
+            padding:230px;
+            background-color: #00f3
+        }
 
-        <div>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link btn-light" href="/geacad/FormAluno.html">Alunos</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link btn-light" href="/geacad/FormCurso.html">Cursos</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link btn-light" href="/geacad/FormDisciplina.html">Disciplinas</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link btn-light" href="/geacad/FormProfessor.html">Professores</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link btn-light" href="/geacad/FormTurma.html">Turmas</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-
-    </body>
+        #logo h1 {
+            font-style:italic;
+        }
+        #menu ul {
+            padding:0px;
+            margin:0px;
+            float: left;
+            width: 100%;
+            background-color:#EDEDED;
+            list-style:none;
+            font:80% Tahoma;
+        }
+ 
+        #menu ul li { display: inline; }
+ 
+        #menu ul li a {
+            background-color:#EDEDED;
+            color: #333;
+            text-decoration: none;
+            border-bottom:3px solid #EDEDED;
+            padding: 2px 10px;
+            float:left;
+        }
+ 
+        #menu ul li a:hover {
+            background-color:#D6D6D6;
+            color: #6D6D6D;
+            border-bottom:3px solid #4169E1;
+        }
+    -->
+    </style>
+</head>
+ 
+<body>
+    <div id="menu">
+        <ul>
+            <li><a href="./FormAluno.html">Aluno</a></li>
+            <li><a href="./FormProfessor.html">Professor</a></li>
+            <li><a href="./FormCurso.html">Curso</a></li>
+            <li><a href="./FormTurma.html">Turma</a></li>
+            <li><a href="./FormDisciplina.html">Disciplina</a></li>
+        </ul>
+    </div>
+    <div id="logo" align="center">
+        <h1> GeAcad </h1>
+    </div>
+</body>
 </html>

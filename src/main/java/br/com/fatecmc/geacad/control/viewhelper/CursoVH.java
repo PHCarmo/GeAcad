@@ -26,7 +26,7 @@ public class CursoVH implements IViewHelper {
     @Override
     public void setView(Object resultado, HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/geacad/ListCurso.xhtml");
+        response.sendRedirect("/geacad/faces/ListCurso.xhtml");
     }
     
 }

@@ -24,7 +24,7 @@
 <body>
     <div id="menu">
         <ul>
-            <li><a href="./index.html">Home</a></li>
+            <li><a href="../index.html">Home</a></li>
             <li><a href="./ListAluno.xhtml">Aluno</a></li>
             <li><a href="./ListProfessor.xhtml">Professor</a></li>
             <li><a href="./ListCurso.xhtml">Curso</a></li>

@@ -36,7 +36,7 @@ public class AlunoVH implements IViewHelper {
     @Override
     public void setView(Object resultado, HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/geacad/ListAluno.xhtml");
+        response.sendRedirect("/geacad/faces/ListAluno.xhtml");
     }
     
 }

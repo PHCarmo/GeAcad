@@ -1,7 +1,11 @@
+br\com\fatecmc\geacad\control\tablejson\IGeneratorJson.class
 br\com\fatecmc\geacad\control\viewhelper\AlunoVH.class
 br\com\fatecmc\geacad\model\domain\Curso.class
 br\com\fatecmc\geacad\model\dao\TurmaDAO.class
+br\com\fatecmc\geacad\control\tablejson\GeneratorJsonCurso.class
 br\com\fatecmc\geacad\control\command\SalvarCommand.class
+br\com\fatecmc\geacad\control\TableConstructor.class
+br\com\fatecmc\geacad\util\ParameterParser.class
 br\com\fatecmc\geacad\control\facade\Facade.class
 br\com\fatecmc\geacad\model\domain\EntidadeDominio.class
 br\com\fatecmc\geacad\control\facade\IFacade.class
@@ -21,6 +25,7 @@ br\com\fatecmc\geacad\model\dao\ProfessorDAO.class
 br\com\fatecmc\geacad\util\ExemploSingleton.class
 br\com\fatecmc\geacad\model\dao\PessoaDAO.class
 br\com\fatecmc\geacad\control\Controller.class
+br\com\fatecmc\geacad\control\tablejson\GeneratorJsonProfessor.class
 br\com\fatecmc\geacad\model\domain\Pessoa.class
 br\com\fatecmc\geacad\control\viewhelper\DisciplinaVH.class
 br\com\fatecmc\geacad\model\dao\DisciplinaDAO.class
@@ -29,8 +34,11 @@ br\com\fatecmc\geacad\model\domain\Disciplina.class
 br\com\fatecmc\geacad\model\dao\CursoDAO.class
 br\com\fatecmc\geacad\model\strategy\ValidarLimiteAlunosTurma.class
 br\com\fatecmc\geacad\model\strategy\ValidarMatriculaAluno.class
+br\com\fatecmc\geacad\control\tablejson\GeneratorJsonDisciplina.class
+br\com\fatecmc\geacad\control\tablejson\GeneratorJsonTurma.class
 br\com\fatecmc\geacad\control\viewhelper\ProfessorVH.class
 br\com\fatecmc\geacad\control\viewhelper\CursoVH.class
 br\com\fatecmc\geacad\model\domain\Professor.class
+br\com\fatecmc\geacad\control\tablejson\GeneratorJsonAluno.class
 br\com\fatecmc\geacad\control\viewhelper\TurmaVH.class
 br\com\fatecmc\geacad\model\strategy\ValidarGradeCurricularAluno.class

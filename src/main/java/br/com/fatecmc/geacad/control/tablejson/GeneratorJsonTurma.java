@@ -24,10 +24,10 @@ public class GeneratorJsonTurma implements IGeneratorJson {
                     +"&datainicio="+ t.getData_inicio()
                     +"&curso="+ t.getCurso().getId()
                     +"&id="+ t.getId()
-                    +"'>Atualizar</a>\","
+                    +"'>Editar</a>\","
                     +"\"<a href='/geacad/Turma?operacao=EXCLUIR"
                     +"&id="+ t.getId()
-                    +"'>Deletar</a>\""
+                    +"'>Excluir</a>\""
                     +"]";
                 if(cont < totalLista){
                     data += ",";

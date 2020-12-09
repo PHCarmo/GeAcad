@@ -35,11 +35,11 @@ public class GeneratorJsonProfessor implements IGeneratorJson{
                     +"&datanasc="+ p.getData_nascimento()
                     +"&sexo="+ p.getSexo()
                     +"&id="+ p.getId()
-                    +"'>Atualizar</a>\","
+                    +"'>Editar</a>\","
                     +"\"<a href='/geacad/Professor?operacao=EXCLUIR"
                     +"&id="+ p.getId()
                     +"&pessoa="+ p.getId_pessoa()
-                    +"'>Deletar</a>\""
+                    +"'>Excluir</a>\""
                     +"]";
                 if(cont < totalLista){
                     data += ",";

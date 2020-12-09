@@ -26,10 +26,10 @@ public class GeneratorJsonCurso implements IGeneratorJson {
                     +"&descricao="+ c.getDescricao()
                     +"&duracao="+ c.getDuracao()
                     +"&id="+ c.getId()
-                    +"'>Atualizar</a>\","
+                    +"'>Editar</a>\","
                     +"\"<a href='/geacad/Curso?operacao=EXCLUIR"
                     +"&id="+ c.getId()
-                    +"'>Deletar</a>\""
+                    +"'>Excluir</a>\""
                     +"]";
                 if(cont < totalLista){
                     data += ",";

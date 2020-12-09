@@ -34,10 +34,10 @@ public class GeneratorJsonDisciplina implements IGeneratorJson {
                     +"&curso="+ d.getCurso().getId()
                     +"&professor="+ d.getProfessor().getId()
                     +"&id="+ d.getId()
-                    +"'>Atualizar</a>\","
+                    +"'>Editar</a>\","
                     +"\"<a href='/geacad/Disciplina?operacao=EXCLUIR"
                     +"&id="+ d.getId()
-                    +"'>Deletar</a>\""
+                    +"'>Excluir</a>\""
                     +"]";
                 if(cont < totalLista){
                     data += ",";

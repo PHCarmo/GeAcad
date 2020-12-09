@@ -37,11 +37,11 @@ public class GeneratorJsonAluno implements IGeneratorJson {
                     +"&datanasc="+ a.getData_nascimento()
                     +"&sexo="+ a.getSexo()
                     +"&id="+ a.getId()
-                    +"'>Atualizar</a>\","
+                    +"'>Editar</a>\","
                     +"\"<a href='/geacad/Aluno?operacao=EXCLUIR"
                     +"&id="+ a.getId()
                     +"&pessoa="+ a.getId_pessoa()
-                    +"'>Deletar</a>\""
+                    +"'>Excluir</a>\""
                     +"]";
                 if(cont < totalLista){
                     data += ",";

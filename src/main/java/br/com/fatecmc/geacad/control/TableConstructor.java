@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 @WebServlet(name = "TableConstructor", urlPatterns = {"/TableConstructor"})
 public class TableConstructor extends HttpServlet {
@@ -43,6 +42,7 @@ public class TableConstructor extends HttpServlet {
         List<EntidadeDominio> entidades = (List<EntidadeDominio>) 
                 new ConsultarCommand().execute(entitys.get(tabela));
         String json = generators.get(tabela).gerar(entidades);
+        
         response.setStatus(200);
         response.getWriter().write(json);
     }

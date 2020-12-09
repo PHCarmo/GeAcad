@@ -2,6 +2,7 @@ package br.com.fatecmc.geacad.control.viewhelper;
 
 import br.com.fatecmc.geacad.model.domain.Curso;
 import br.com.fatecmc.geacad.model.domain.EntidadeDominio;
+import br.com.fatecmc.geacad.util.ParameterParser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,10 +16,8 @@ public class CursoVH implements IViewHelper {
         String nome =      request.getParameter("nome");
         String turno =     request.getParameter("turno");
         String descricao = request.getParameter("descricao");
-        int duracao =      request.getParameter("duracao") == null ? 
-                0 : Integer.parseInt(request.getParameter("duracao"));
-        int id_curso =     request.getParameter("id") == null ? 
-                0 : Integer.parseInt(request.getParameter("id"));
+        int duracao =      ParameterParser.toInt(request.getParameter("duracao"));
+        int id_curso =     ParameterParser.toInt(request.getParameter("id"));
         
         Curso curso = new Curso(nome, turno, descricao, duracao, id_curso);
         return curso;
@@ -27,12 +26,7 @@ public class CursoVH implements IViewHelper {
     @Override
     public void setView(Object resultado, HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        if (resultado != null) {
-            out.println(resultado);
-        } else {
-            out.println("<h1>Operação realizada com sucesso cadastrado!</h1>");
-        }
+        response.sendRedirect("/geacad/ListCurso.xhtml");
     }
     
 }
